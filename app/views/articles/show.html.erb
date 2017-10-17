@@ -20,6 +20,7 @@
 
 <h2>Add a comment:</h2>
 <%= render partial: 'comments/form', locals: {commentable: @article} %>
-
+<!--<h2>Edit a comment</h2>-->
+<%#= render 'comments/edit',locals: {commentable: @article} %>
 <%= link_to 'Edit', edit_article_path(@article)%>
 <%= link_to 'All Articles', controller: 'articles', action: 'index' %>

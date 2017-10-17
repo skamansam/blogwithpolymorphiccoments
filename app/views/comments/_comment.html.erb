@@ -6,7 +6,7 @@
  
 <p>
   <strong>Comment:</strong>
-  <%= comment.body %>
+  <%= best_in_place comment.body, :body, type: :textarea  %>
 </p>
 <p>
     <%= link_to 'Edit', [:edit, commentable, comment], data: { confirm: 'Are you sure?' } %>

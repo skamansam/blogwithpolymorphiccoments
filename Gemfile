@@ -53,3 +53,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'pg'
 gem 'devise'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'best_in_place', '~> 3.1', '>= 3.1.1'
