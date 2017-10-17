@@ -1,3 +1,18 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+[contenteditable="true"] {
+  border: inset #333 1px;
+  background: #eee;
+  color: #000;
+  padding: 1em;
+}
+#edit-toolbar {
+  border: 1px solid #333;
+  margin: 0px;
+}
+#editMode {
+  padding: 0px;
+  margin: 0px;
+  float: left;
+}
