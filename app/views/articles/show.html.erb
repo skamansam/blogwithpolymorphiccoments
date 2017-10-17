@@ -1,12 +1,18 @@
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @article.text %>
-</p>
+<div id="article">
+  <p>
+    <strong>Title:</strong>
+    <div class="editable" src="<%= article_path(@article) %>" property="title">
+      <%= @article.title %>
+    </div>
+  </p>
+  
+  <p>
+    <strong>Text:</strong>
+    <div class="editable" src="<%= article_path(@article) %>" property="text">
+      <%= @article.text %>
+    </div>
+  </p>
+</div>
 <h2>Comments</h2>
 <!--This will now render the partial in app/views/comments/_comment.html.erb -->
 <!--once for each comment that is in the @article.comments-->
@@ -20,6 +26,6 @@
 
 <h2>Add a comment:</h2>
 <%= render partial: 'comments/form', locals: {commentable: @article} %>
-
-<%= link_to 'Edit', edit_article_path(@article)%>
+<a href="#" onclick="editNode('#article')">Edit</a>
+<% link_to 'Edit', edit_article_path(@article)%>
 <%= link_to 'All Articles', controller: 'articles', action: 'index' %>
