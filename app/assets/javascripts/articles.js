@@ -1,20 +1,19 @@
-//# Place all the behaviors and hooks related to the matching controller here.
-//# All this logic will automatically be available in application.js.
-//# You can use CoffeeScript in this file: http://coffeescript.org/
-
-var editNode = (nodeId) => {
+/** This enables editing for a given node. It will activate the contentEditable API for 
+ * all elements with a `editable` class. This elements must have a property attribute which says what 
+ * model attribute the field is editing. The elements must also have a src attribute which is a url
+ * where the data is sent.
+ */
+var enableEditing = (nodeId) => {
   nodes = document.querySelector(nodeId).querySelectorAll('.editable')
   nodes.forEach( (node)=> {
-    //console.info("editing: ", node)
     node.setAttribute('contentEditable', 'true')
     node.onfocus = () => {
-      let elem = node
-      //console.info('Focusing: ', node)
       window.selectedEditor = node
       window.editorToolbar = new editorToolbar(node)
     }
     node.onblur = ()=> {
       saveData(node)
+      window.editorToolbar.toolbarElement.classList.remove('active')
     }
   })
   nodes[0].focus()
@@ -26,17 +25,17 @@ var editNode = (nodeId) => {
  * NOTE: this function appends the CSRF data using getCSRFParam(), so that functon should return the correct auth values.
  */
 var saveData = (node) => {
-  console.info(node)
   const url = node.getAttribute('src')
   const data = new FormData()
   const request = new XMLHttpRequest();
   const csrfData = getCSRFParam()
   const editParam = node.getAttribute('property')
-  data.append(editParam, node.innerHtml)
+  data.append(editParam, node.innerHTML)
   data.append(csrfData.paramName, csrfData.token)
-  console.info(url, data)
-  request.open("PATCH", url);
+  request.open("PUT", url);
   request.send(data)
+
+  //document.getElementById('edit-toolbar').classList.remove('active')
 }
 
 /** get the correct cross-site request forgery prevention (CSRF) token and return it as an object for 
@@ -69,15 +68,16 @@ class editorToolbar {
     this.toolbarElement = document.getElementById('edit-toolbar')
     this.attachToolbar()
   }
+
   attachToolbar(){
     const inserted_node = this.elem.parentNode.insertBefore(this.toolbarElement, this.elem)
-    console.log('Attaching toolbar')
+    this.toolbarElement.classList.add('active')
   }
   formatDoc(sCmd, sValue) {
     if (this.validateMode()) { document.execCommand(sCmd, false, sValue); this.elem.focus(); }
   }
   validateMode() {
-    if (!this.toolbarElement.getElementById('switchMode').checked) { return true ; }
+    if (!document.getElementById('switchBox').checked) { return true ; }
     alert("Uncheck \"Show HTML\".");
     elem.focus();
     return false;

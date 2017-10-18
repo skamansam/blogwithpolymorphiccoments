@@ -1,16 +1,12 @@
 <div id="article">
   <p>
     <strong>Title:</strong>
-    <div class="editable" src="<%= article_path(@article) %>" property="article[title]">
-      <%= @article.title %>
-    </div>
+    <div class="editable" src="<%= article_path(@article) %>" property="article[title]"><%= @article.title.html_safe %></div>
   </p>
   
   <p>
     <strong>Text:</strong>
-    <div class="editable" src="<%= article_path(@article) %>" property="article[text]">
-      <%= @article.text %>
-    </div>
+    <div class="editable" src="<%= article_path(@article) %>" property="article[text]"><%= @article.text.html_safe %></div>
   </p>
 </div>
 <h2>Comments</h2>
@@ -26,7 +22,7 @@
   
 <h2>Add a comment:</h2>
 <%= render partial: 'comments/form', locals: {commentable: @article} %>
-<input type="button" onclick="editNode('#article')" value="Edit"></input>
+<input type="button" onclick="enableEditing('#article')" value="Edit"></input>
 <%# <%= link_to 'Edit', edit_article_path(@article) %>
 <%= link_to 'All Articles', controller: 'articles', action: 'index' %>
 <%= render partial: 'shared/edit-toolbar', locals: {commentable: @article} %>
