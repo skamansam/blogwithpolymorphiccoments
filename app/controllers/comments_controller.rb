@@ -18,9 +18,10 @@ class CommentsController < ApplicationController
       render :new
     end
   end
+
   
   def edit
-    #@comment = @commentable.comments.find(params[:id])
+    @comment = @commentable.comments.find(params[:id])
   end
    
   def update

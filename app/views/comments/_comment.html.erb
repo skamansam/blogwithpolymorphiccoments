@@ -6,9 +6,9 @@
  
 <p>
   <strong>Comment:</strong>
-  <%= best_in_place comment.body, :body, type: :textarea  %>
+  <%= comment.body %>
 </p>
 <p>
-    <%= link_to 'Edit', [:edit, commentable, comment], data: { confirm: 'Are you sure?' } %>
+    <%#= link_to 'Edit', [:edit, commentable, comment], data: { confirm: 'Are you sure?' } %>
     <%= link_to "Delete", [commentable, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
   <%end%>  
