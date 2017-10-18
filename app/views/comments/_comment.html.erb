@@ -1,14 +1,30 @@
+<script type="text/javascript">
+function reply_click(node)
+{
+    alert("i am clicked" + node );
+     nodes = document.querySelector(node).querySelectorAll('.editable')
+    nodes[0].setAttribute('contentEditable', 'true')
+}
+</script
+
 <% commentable.comments.each do |comment| %>
 <p>
   <strong>Commenter:</strong>
   <%= comment.commenter %>
 </p>
  
-<p>
+<p id="comment">
   <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
+  <div  class="editable" src="<%= article_comment_url(comment.id) %>" property="comment['body']">
+    <%= comment.body.html_safe %>
+  </div>    
+</p> 
 <p>
     <%#= link_to 'Edit', [:edit, commentable, comment], data: { confirm: 'Are you sure?' } %>
     <%= link_to "Delete", [commentable, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
-  <%end%>  
+    <input type="button" onclick="reply_click('#comment')" value="Edit Comment"></input>
+<%end%> 
+</p>
+
+
+  

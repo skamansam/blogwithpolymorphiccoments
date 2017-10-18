@@ -1,12 +1,14 @@
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @article.text %>
-</p>
+<div id="article">
+  <p>
+    <strong>Title:</strong>
+    <div class="editable" src="<%= article_path(@article) %>" property="article[title]"><%= @article.title.html_safe%></div>
+  </p>
+  
+  <p>
+    <strong>Text:</strong>
+    <div class="editable" src="<%= article_path(@article) %>" property="article[text]"><%= @article.text.html_safe %></div>
+  </p>
+</div>
 <h2>Comments</h2>
 <!--This will now render the partial in app/views/comments/_comment.html.erb -->
 <!--once for each comment that is in the @article.comments-->
@@ -17,10 +19,10 @@
 <!--in the partial for us to show.-->
 <%#= render @article.comments %>
 <%= render partial: 'comments/comment', locals: {commentable: @article} %>
-
+  
 <h2>Add a comment:</h2>
 <%= render partial: 'comments/form', locals: {commentable: @article} %>
-<!--<h2>Edit a comment</h2>-->
-<%#= render 'comments/edit',locals: {commentable: @article} %>
-<%= link_to 'Edit', edit_article_path(@article)%>
+<input type="button" onclick="enableEditing('#article')" value="Edit"></input>
+<%# <%= link_to 'Edit', edit_article_path(@article) %>
 <%= link_to 'All Articles', controller: 'articles', action: 'index' %>
+<%= render partial: 'shared/edit-toolbar', locals: {commentable: @article} %>
