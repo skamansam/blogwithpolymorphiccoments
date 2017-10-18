@@ -26,12 +26,23 @@ class CommentsController < ApplicationController
    
   def update
     @comment = @commentable.comments.find(params[:id])
-    if @comment.update_attributes(comment_params)
-      redirect_to @comment.commentable, notice: "Comment was updated."
-    else
-      render :edit
+    respond_to do |format|
+      if @comment.update_attributes(comment_params)
+        #redirect_to @comment.commentable, notice: "Comment was updated."
+        format.json { render @comment }
+        format.html { render :show }
+      else
+        format.json { render json: { error: error_response }.to_json, status: :unprocessible_entity }
+        format.html { flash[:error] = @comment.error unless flash[:error]; render :edit }
+      end        
     end
+
   end
+  
+ 
+  
+  
+  
   def destroy
     @comment = @commentable.comments.find(params[:id])
     if @comment.destroy

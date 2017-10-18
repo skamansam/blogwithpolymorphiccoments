@@ -35,11 +35,14 @@ class ArticlesController < ApplicationController
   
   def update
     @article = Article.find(params[:id])
-    
-    if @article.update(article_params)
-      redirect_to @article
-    else
-      render 'edit'
+    respond_to do |format|
+      if @article.update_attributes(article_params)
+        format.json { render @article }
+        format.html { render :show }
+      else
+        format.json { render json: { error: error_response }.to_json, status: :unprocessible_entity }
+        format.html { flash[:error] = @article.error unless flash[:error]; render :edit }
+      end
     end
   end
   
