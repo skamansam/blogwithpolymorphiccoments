@@ -55,3 +55,6 @@ gem 'pg'
 gem 'devise'
 gem 'annotate' # gives db info at top of models
 gem 'pry-rails'
+
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'bootstrap-editable-rails'

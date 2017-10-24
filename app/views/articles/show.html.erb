@@ -1,7 +1,7 @@
 <div id="article">
   <p>
     <strong>Title:</strong>
-    <div class="editable" src="<%= article_path(@article) %>" property="article[title]"><%= @article.title.html_safe %></div>
+    <div class="editable" src="<%= article_path(@article) %>" property="article[title]"><%= @article.title.html_safe%></div>
   </p>
   
   <p>
@@ -17,8 +17,8 @@
 <!--comment to a local variable named the same as the -->
 <!--partial, in this case comment which is then available -->
 <!--in the partial for us to show.-->
-<%= render @article.comments %>
-<%#= render partial: 'comments/comment', locals: {commentable: @article} %>
+<%#= render @article.comments %>
+<%= render partial: 'comments/comment', locals: {commentable: @article} %>
   
 <h2>Add a comment:</h2>
 <%= render partial: 'comments/form', locals: {commentable: @article} %>

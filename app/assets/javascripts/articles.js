@@ -4,8 +4,11 @@
  * where the data is sent.
  */
 var enableEditing = (nodeId) => {
+  alert("I am there");
+  alert(nodeId);
   nodes = document.querySelector(nodeId).querySelectorAll('.editable')
   nodes.forEach( (node)=> {
+    alert(node)
     node.setAttribute('contentEditable', 'true')
     node.onfocus = () => {
       window.selectedEditor = node
@@ -25,6 +28,7 @@ var enableEditing = (nodeId) => {
  * NOTE: this function appends the CSRF data using getCSRFParam(), so that functon should return the correct auth values.
  */
 var saveData = (node) => {
+  
   const url = node.getAttribute('src')
   const data = new FormData()
   const request = new XMLHttpRequest();

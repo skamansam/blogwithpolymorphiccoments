@@ -1,8 +1,10 @@
 <%= form_with(model: [commentable, Comment.new],local: true) do |form| %>
-  <p>
+<%#= form_with model: commentable, local: true do |form| %>
+  <p >
     <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
+    <%= form.text_field :commenter%>
   </p>
+   <!--contenteditable: "true"-->
   <p>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
